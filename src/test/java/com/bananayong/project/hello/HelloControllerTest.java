@@ -84,4 +84,19 @@ class HelloControllerTest {
             .andExpect(status().isOk())
             .andExpect(content().string(expected));
     }
+
+    @DisplayName("test too short name.")
+    @Test
+    void testGetHelloWithBadname() throws Exception {
+        // given
+        var name = "y";
+
+        // when
+        var action = mockMvc.perform(get("/hello?name={name}", name));
+
+        // then
+        action
+            .andExpect(status().isBadRequest())
+            .andExpect(content().string("BadRequest. wrong parameter: name"));
+    }
 }
