@@ -1,0 +1,15 @@
+spring:
+  security:
+    # for actuator authentication
+    user:
+      name: admin-user
+      password: '{noop}admin-pass'
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+          - health
+          - prometheus
