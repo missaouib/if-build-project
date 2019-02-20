@@ -1,9 +1,10 @@
 package com.bananayong.project.login.web;
 
+import com.bananayong.project.login.LoginService;
+import com.bananayong.project.user.User;
+import com.bananayong.project.user.UserService;
+import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,47 +13,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import static org.springframework.security.core.authority.AuthorityUtils.createAuthorityList;
+import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 public class LoginController {
 
-    private Map<String, String> userRepository = new ConcurrentHashMap<>();
+    private final UserService userService;
+    private final LoginService loginService;
 
     @PostMapping(path = "/sign-up")
     public SignUpResponse signUp(@RequestBody SignUpRequest request) {
-
-        userRepository.put(request.getUsername(), request.getPassword());
-
+        userService.createUser(request.getUsername(), request.getPassword());
         return SignUpResponse.of(request.getUsername(), Instant.now());
     }
 
     @PostMapping(path = "/login")
     public LoginResponse login(@RequestBody LoginRequest request, HttpServletRequest httpServletRequest) {
         var username = request.getUsername();
-        var credential = userRepository.get(username);
+        var password = request.getPassword();
 
-        if (request.getPassword().equals(credential)) {
-            httpServletRequest.getSession(true);
-            var token = new UsernamePasswordAuthenticationToken(username, "", createAuthorityList("ROLE_USER"));
-            SecurityContextHolder.getContext().setAuthentication(token);
+        loginService.login(username, password);
+        httpServletRequest.getSession(true);
 
-            return LoginResponse.of(username, Instant.now());
-        }
-
-        throw new BadCredentialsException("Bad credential");
+        return LoginResponse.of(username, Instant.now());
     }
 
     @GetMapping("/users/{username}")
-    public String getUser(@NotNull @PathVariable String username) {
-        if (userRepository.containsKey(username)) {
-            return username;
-        }
-
-        throw new IllegalArgumentException("Bad username");
+    public User getUser(@NotNull @PathVariable String username) {
+        Optional<User> user = userService.findUser(username);
+        return user.orElseThrow(() -> new IllegalArgumentException("Not found username: " + username));
     }
 
 }
