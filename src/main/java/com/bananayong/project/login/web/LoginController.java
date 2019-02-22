@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,8 +23,8 @@ public class LoginController {
 
     @PostMapping(path = "/sign-up")
     public SignUpResponse signUp(@RequestBody SignUpRequest request) {
-        userService.createUser(request.getUsername(), request.getPassword());
-        return SignUpResponse.of(request.getUsername(), Instant.now());
+        var user = userService.createUser(request.getUsername(), request.getPassword());
+        return SignUpResponse.of(user.getUsername(), Instant.now());
     }
 
     @PostMapping(path = "/login")
@@ -41,7 +40,7 @@ public class LoginController {
 
     @GetMapping("/users/{username}")
     public User getUser(@NotNull @PathVariable String username) {
-        Optional<User> user = userService.findUser(username);
+        var user = userService.findUser(username);
         return user.orElseThrow(() -> new IllegalArgumentException("Not found username: " + username));
     }
 

@@ -4,24 +4,25 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 @RequiredArgsConstructor
 public class UserService {
-    private final Map<String, User> userRepository = new ConcurrentHashMap<>();
     private final PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    private final UserRepository userRepository;
 
-    public void createUser(String username, String password) {
+    @Transactional
+    public User createUser(String username, String password) {
         var encodedPassword = passwordEncoder.encode(password);
-        userRepository.put(username, new User(username, encodedPassword));
+        return userRepository.save(new User(username, encodedPassword));
     }
 
+    @Transactional(readOnly = true)
     public Optional<User> findUser(String username) {
-        var user = userRepository.get(username);
+        var user = userRepository.findByUsername(username);
         if (user != null) {
             return Optional.of(user);
         }

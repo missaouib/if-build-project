@@ -18,6 +18,8 @@
 		<java.version>11</java.version>
 		<junit-jupiter.version>5.4.0</junit-jupiter.version>
 		<intellij-annotations.version>9.0.4</intellij-annotations.version>
+		<testcontainers.version>1.10.6</testcontainers.version>
+		<datasource-proxy.version>1.5</datasource-proxy.version>
 	</properties>
 
 	<dependencies>
@@ -37,6 +39,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
@@ -51,6 +57,14 @@
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.module</groupId>
@@ -60,7 +74,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>net.ttddyy</groupId>
+			<artifactId>datasource-proxy</artifactId>
+			<version>${datasource-proxy.version}</version>
+		</dependency>
         <!-- Tools -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -83,17 +101,23 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>junit</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
 			<version>${junit-jupiter.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>${testcontainers.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>mysql</artifactId>
+			<version>${testcontainers.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
