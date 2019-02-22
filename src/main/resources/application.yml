@@ -54,6 +54,15 @@ spring:
     # Do NOT use flyway in production
     enabled: false
 
+logging:
+  group:
+    tomcat:
+      - org.apache.catalina
+      - org.apache.coyote
+      - org.apache.tomcat
+  level:
+    tomcat: info
+
 management:
   endpoints:
     web:
@@ -89,3 +98,5 @@ spring:
 
   flyway:
     enabled: false
+logging:
+  config: classpath:log4j2-spring-console.xml
