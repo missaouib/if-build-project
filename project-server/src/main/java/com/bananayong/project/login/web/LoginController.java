@@ -1,12 +1,8 @@
 package com.bananayong.project.login.web;
 
 import com.bananayong.project.login.LoginService;
-import com.bananayong.project.user.User;
 import com.bananayong.project.user.UserService;
 import lombok.RequiredArgsConstructor;
-import org.jetbrains.annotations.NotNull;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,11 +33,4 @@ public class LoginController {
 
         return LoginResponse.of(username, Instant.now());
     }
-
-    @GetMapping("/users/{username}")
-    public User getUser(@NotNull @PathVariable String username) {
-        var user = userService.findUser(username);
-        return user.orElseThrow(() -> new IllegalArgumentException("Not found username: " + username));
-    }
-
 }

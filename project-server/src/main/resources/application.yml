@@ -85,8 +85,9 @@ spring:
 
   datasource:
     # serverTimezone=UTC url parameter로 설정하지 않으면 적용이 안됨.
-    url: jdbc:mysql://localhost:3306/build_project?serverTimezone=UTC
-    username: root
+    url: jdbc:mysql://localhost:13306/dev?serverTimezone=UTC
+    username: test
+    password: test
 
   jpa:
     hibernate:
@@ -95,6 +96,9 @@ spring:
       hibernate:
         format_sql: true
         use_sql_comments: true
+
+  redis:
+    port: 16379
 
   flyway:
     enabled: false
