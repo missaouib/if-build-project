@@ -1,27 +1,41 @@
 package com.bananayong.project;
 
+import okhttp3.HttpUrl;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import java.util.Map;
 
-@ActiveProfiles("integration-test")
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+
+@ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 @Testcontainers
-public abstract class AbstractIntegrationTestSupport { // NOSONAR
+public abstract class AbstractITSupport { // NOSONAR
 
     @Container
     private static final MySQLContainer MYSQL;
     @Container
     private static final GenericContainer REDIS;
+
+    @LocalServerPort
+    public int port;
+
+    protected Retrofit retrofit;
 
     static {
         MYSQL = new MySQLContainer<>()
@@ -33,6 +47,16 @@ public abstract class AbstractIntegrationTestSupport { // NOSONAR
             .withTmpFs(Map.of("/var/lib/mysql", "rw"));
 
         REDIS = new GenericContainer("redis").withExposedPorts(6379);
+    }
+
+    @BeforeEach
+    public void setupRetrofit() {
+        retrofit = new Retrofit.Builder()
+            .baseUrl(HttpUrl.get("http://localhost:" + port))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
     }
 
     @BeforeAll

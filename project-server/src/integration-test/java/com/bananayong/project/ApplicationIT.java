@@ -2,7 +2,7 @@ package com.bananayong.project;
 
 import org.junit.jupiter.api.Test;
 
-class ApplicationIntegrationTestSupport extends AbstractIntegrationTestSupport {
+class ApplicationIT extends AbstractIntegrationTestSupport {
 
 	@SuppressWarnings("EmptyMethod")
 	@Test

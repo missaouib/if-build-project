@@ -23,11 +23,14 @@
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
         <git-commit-id-plugin.version>2.2.6</git-commit-id-plugin.version>
+        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
     </properties>
 
     <modules>
         <module>project-domain</module>
         <module>project-server</module>
+        <module>project-swagger</module>
+        <module>project-test</module>
     </modules>
 
     <dependencyManagement>
@@ -71,6 +74,11 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                </plugin>
+                <plugin>
                     <groupId>pl.project13.maven</groupId>
                     <artifactId>git-commit-id-plugin</artifactId>
                     <version>${git-commit-id-plugin.version}</version>
@@ -101,6 +109,9 @@
                             </goals>
                         </execution>
                     </executions>
+                    <configuration>
+                        <classifier>exec</classifier>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
