@@ -1,6 +1,6 @@
 package com.bananayong.project.config;
 
-import com.bananayong.project.login.LoginUserDetailsService;
+import com.bananayong.project.security.ApiAuthenticationProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.actuate.health.HealthEndpoint;
@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.NEVER;
@@ -26,17 +25,17 @@ public class WebSecurityConfig { // NOSONAR
     @RequiredArgsConstructor
     public class ApiWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-        private final LoginUserDetailsService loginUserDetailsService;
-
-        @Override
-        protected UserDetailsService userDetailsService() {
-            return loginUserDetailsService;
-        }
+        private final ApiAuthenticationProvider apiAuthenticationProvider;
 
         @Bean(name = "authenticationManager")
         @Override
         public AuthenticationManager authenticationManagerBean() throws Exception {
             return super.authenticationManagerBean();
+        }
+
+        @Override
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+            auth.authenticationProvider(apiAuthenticationProvider);
         }
 
         @Override

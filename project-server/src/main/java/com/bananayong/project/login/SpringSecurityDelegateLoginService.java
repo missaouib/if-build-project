@@ -1,8 +1,8 @@
 package com.bananayong.project.login;
 
+import com.bananayong.project.security.ApiAuthenticationToken;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ public class SpringSecurityDelegateLoginService implements LoginService {
 
     @Override
     public void login(String username, String password) {
-        var authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+        var authenticate = authenticationManager.authenticate(new ApiAuthenticationToken(username, password));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
     }
 }

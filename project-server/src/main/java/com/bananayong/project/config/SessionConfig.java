@@ -21,9 +21,8 @@ public class SessionConfig implements BeanClassLoaderAware {
     }
 
     private ObjectMapper objectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModules(SecurityJackson2Modules.getModules(this.loader));
-        return mapper;
+        return new ObjectMapper()
+            .registerModules(SecurityJackson2Modules.getModules(this.loader));
     }
 
     @Bean
