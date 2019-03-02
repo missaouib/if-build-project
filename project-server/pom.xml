@@ -5,8 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.bananayong</groupId>
-        <artifactId>project</artifactId>
+        <artifactId>project-parent</artifactId>
         <version>0.1.0-SNAPSHOT</version>
+        <relativePath>../project-parent</relativePath>
     </parent>
     <artifactId>project-server</artifactId>
     <packaging>jar</packaging>
@@ -16,7 +17,6 @@
         <dependency>
             <groupId>com.bananayong</groupId>
             <artifactId>project-domain</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -82,6 +82,7 @@
             <groupId>net.ttddyy</groupId>
             <artifactId>datasource-proxy</artifactId>
         </dependency>
+
         <!-- Tools -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -107,11 +108,6 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
