@@ -1,0 +1,15 @@
+language: java
+jdk:
+  - oraclejdk11
+  - openjdk11
+
+services:
+  - docker
+
+branches:
+  only:
+    - master
+    - develop
+
+script:
+  - ./mvnw -PIT verify -B
