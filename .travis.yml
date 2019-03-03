@@ -11,5 +11,17 @@ branches:
     - master
     - develop
 
+addons:
+  sonarcloud:
+    organization: "bananayong-github"
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+
 script:
   - ./mvnw -PIT verify -B
+  - ./mvnw sonar:sonar
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
