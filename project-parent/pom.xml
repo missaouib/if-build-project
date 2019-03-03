@@ -24,6 +24,7 @@
         <handlebars.version>4.1.2</handlebars.version>
 
         <swagger-codegen.version>3.0.5</swagger-codegen.version>
+        <jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -100,6 +101,29 @@
     </dependencyManagement>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>report</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
