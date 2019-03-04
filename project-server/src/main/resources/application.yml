@@ -38,6 +38,8 @@ spring:
         order_inserts: true
         order_updates: true
         default_batch_fetch_size: 32
+        query:
+          in_clause_parameter_padding: true
 
   data:
     jpa:
