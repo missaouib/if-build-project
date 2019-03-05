@@ -14,7 +14,8 @@ public class SpringSecurityDelegateLoginService implements LoginService {
 
     @Override
     public void login(String username, String password) {
-        var authenticate = authenticationManager.authenticate(new ApiAuthenticationToken(username, password));
+        var token = new ApiAuthenticationToken(username, password);
+        var authenticate = authenticationManager.authenticate(token);
         SecurityContextHolder.getContext().setAuthentication(authenticate);
     }
 }

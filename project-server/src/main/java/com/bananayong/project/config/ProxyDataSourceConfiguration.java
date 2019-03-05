@@ -21,7 +21,9 @@ public class ProxyDataSourceConfiguration {
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource.hikari")
     public DataSource dataSource(DataSourceProperties properties) {
-        var hikariDataSource = properties.initializeDataSourceBuilder().type(HikariDataSource.class).build();
+        var hikariDataSource = properties.initializeDataSourceBuilder()
+                                         .type(HikariDataSource.class)
+                                         .build();
         if (StringUtils.hasText(properties.getName())) {
             hikariDataSource.setPoolName(properties.getName());
         }

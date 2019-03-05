@@ -25,7 +25,7 @@ public class WebSecurityConfig { // NOSONAR
     @RequiredArgsConstructor
     public class ApiWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-        private final ApiAuthenticationProvider apiAuthenticationProvider;
+        private final ApiAuthenticationProvider authenticationProvider;
 
         @Bean(name = "authenticationManager")
         @Override
@@ -34,8 +34,8 @@ public class WebSecurityConfig { // NOSONAR
         }
 
         @Override
-        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.authenticationProvider(apiAuthenticationProvider);
+        protected void configure(AuthenticationManagerBuilder auth) {
+            auth.authenticationProvider(authenticationProvider);
         }
 
         @Override
@@ -75,14 +75,16 @@ public class WebSecurityConfig { // NOSONAR
             // @formatter:off
             http.requestMatcher(EndpointRequest.toAnyEndpoint())
                 .authorizeRequests()
-				.requestMatchers(
-						EndpointRequest.to(HealthEndpoint.class, InfoEndpoint.class)).permitAll()
+                .requestMatchers(
+                        EndpointRequest.to(HealthEndpoint.class, InfoEndpoint.class)
+                )
+                    .permitAll()
                 .anyRequest()
                     .hasRole(ACTUATOR_ROLE)
                     .and()
                 .formLogin()
                     .and()
-				.httpBasic();
+                .httpBasic();
             // @formatter:on
         }
 
