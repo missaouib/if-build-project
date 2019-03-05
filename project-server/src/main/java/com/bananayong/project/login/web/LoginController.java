@@ -24,7 +24,10 @@ public class LoginController {
     }
 
     @PostMapping(path = "/login")
-    public LoginResponse login(@RequestBody LoginRequest request, HttpServletRequest httpServletRequest) {
+    public LoginResponse login(
+        @RequestBody LoginRequest request,
+        HttpServletRequest httpServletRequest
+    ) {
         var username = request.getUsername();
         var password = request.getPassword();
 

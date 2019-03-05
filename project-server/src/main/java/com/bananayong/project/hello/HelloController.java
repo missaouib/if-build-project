@@ -1,6 +1,10 @@
 package com.bananayong.project.hello;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.Length;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
@@ -9,12 +13,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-
 import static org.apache.commons.lang3.StringUtils.capitalize;
 import static org.springframework.http.ResponseEntity.badRequest;
 
+@Slf4j
 @RestController
 public class HelloController {
 
@@ -26,10 +28,13 @@ public class HelloController {
 
     @ExceptionHandler
     public ResponseEntity<String> badRequestException(BindException e) {
-        //noinspection ConstantConditions
-        var field = e.getFieldError().getField();
-        var message = "BadRequest. wrong parameter: " + field;
-        return badRequest().body(message);
+        var fieldError = e.getFieldError();
+        if (fieldError == null) {
+            log.warn("Non field error", e);
+            return badRequest().body("BadRequest. ");
+        }
+
+        return badRequest().body("BadRequest. wrong parameter: " + fieldError.getField());
     }
 
     @Data

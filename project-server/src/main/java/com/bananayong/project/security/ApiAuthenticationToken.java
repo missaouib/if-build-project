@@ -38,6 +38,7 @@ public class ApiAuthenticationToken extends AbstractAuthenticationToken { // NOS
     public ApiAuthenticationToken(
         @JsonProperty("id") long id,
         @NotNull @JsonProperty("principal") String principal,
+        @SuppressWarnings("PMD.ArrayIsStoredDirectly")
         @NotNull @JsonProperty("roles") String... roles
     ) {
         super(AuthorityUtils.createAuthorityList(roles));
@@ -78,7 +79,7 @@ public class ApiAuthenticationToken extends AbstractAuthenticationToken { // NOS
         return super.isAuthenticated();
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "PMD.MethodReturnsInternalArray"})
     public String[] getRoles() {
         return roles;
     }
