@@ -1,7 +1,11 @@
 package com.bananayong.project.security;
 
+import java.util.Collection;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -9,8 +13,6 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-
-import java.util.Collection;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
@@ -23,7 +25,7 @@ public class ApiAuthenticationToken extends AbstractAuthenticationToken { // NOS
     private final String principal;
     private long id;
     private String credentials;
-    private final String[] roles;
+    private final Collection<String> roles;
 
     public ApiAuthenticationToken(@NotNull String principal, @NotNull String credentials) {
         super(null);
@@ -44,7 +46,7 @@ public class ApiAuthenticationToken extends AbstractAuthenticationToken { // NOS
         super(AuthorityUtils.createAuthorityList(roles));
         this.principal = principal;
         this.credentials = null;
-        this.roles = roles;
+        this.roles = Set.of(roles);
         this.id = id;
         setAuthenticated(true);
         setDetails(id);
@@ -79,9 +81,10 @@ public class ApiAuthenticationToken extends AbstractAuthenticationToken { // NOS
         return super.isAuthenticated();
     }
 
-    @SuppressWarnings({"unused", "PMD.MethodReturnsInternalArray"})
-    public String[] getRoles() {
-        return roles;
+    @JsonGetter
+    @SuppressWarnings({"unused"})
+    private String[] getRoles() {
+        return roles.toArray(String[]::new);
     }
 
     @JsonIgnore
