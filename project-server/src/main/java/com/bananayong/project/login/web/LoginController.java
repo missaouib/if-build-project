@@ -2,13 +2,17 @@ package com.bananayong.project.login.web;
 
 import com.bananayong.project.login.LoginService;
 import com.bananayong.project.user.UserService;
+import com.bananayong.project.user.UsernameExistException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,5 +39,13 @@ public class LoginController {
         httpServletRequest.getSession(true);
 
         return LoginResponse.of(username, Instant.now());
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Map<String, String>> usernameException(UsernameExistException ex) {
+        var msg = Map.of("msg", "can not use username. username: " + ex.getUsername());
+        return ResponseEntity.badRequest()
+                             .body(msg);
+
     }
 }

@@ -112,6 +112,7 @@ spring:
     port: 16379
 
   flyway:
-    enabled: false
+    enabled: true
+
 logging:
   config: classpath:log4j2-spring-console.xml
