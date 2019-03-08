@@ -9,6 +9,6 @@ public class UsernameExistException extends RuntimeException {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 }

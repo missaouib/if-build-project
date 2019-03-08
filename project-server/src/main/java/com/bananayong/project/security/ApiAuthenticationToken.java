@@ -55,12 +55,12 @@ public class ApiAuthenticationToken extends AbstractAuthenticationToken { // NOS
     @JsonIgnore
     @Override
     public String getCredentials() {
-        return credentials;
+        return this.credentials;
     }
 
     @Override
     public String getPrincipal() {
-        return principal;
+        return this.principal;
     }
 
     @JsonIgnore
@@ -84,7 +84,7 @@ public class ApiAuthenticationToken extends AbstractAuthenticationToken { // NOS
     @JsonGetter
     @SuppressWarnings({"unused"})
     private String[] getRoles() {
-        return roles.toArray(String[]::new);
+        return this.roles.toArray(String[]::new);
     }
 
     @JsonIgnore
@@ -95,12 +95,12 @@ public class ApiAuthenticationToken extends AbstractAuthenticationToken { // NOS
 
     @SuppressWarnings("unused")
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     @Override
     public void eraseCredentials() {
         super.eraseCredentials();
-        credentials = null;
+        this.credentials = null;
     }
 }

@@ -1,8 +1,8 @@
 package com.bananayong.project.login.web;
 
-import lombok.Value;
-
 import javax.validation.constraints.NotEmpty;
+
+import lombok.Value;
 
 @Value
 class SignUpRequest {

@@ -1,8 +1,8 @@
 package com.bananayong.project.login.web;
 
-import lombok.Value;
-
 import java.time.Instant;
+
+import lombok.Value;
 
 @Value(staticConstructor = "of")
 class SignUpResponse {

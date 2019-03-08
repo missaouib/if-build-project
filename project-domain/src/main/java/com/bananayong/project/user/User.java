@@ -1,9 +1,10 @@
 package com.bananayong.project.user;
 
+import java.time.Instant;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.Instant;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

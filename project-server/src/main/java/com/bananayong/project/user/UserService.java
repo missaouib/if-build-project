@@ -17,15 +17,16 @@ public class UserService {
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        this.passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
     @Transactional
     public User createUser(String username, String password) {
-        var encodedPassword = passwordEncoder.encode(password);
+        var encodedPassword = this.passwordEncoder.encode(password);
         try {
-            return userRepository.saveAndFlush(new User(username, encodedPassword));
-        } catch (DataIntegrityViolationException e) {
+            return this.userRepository.saveAndFlush(new User(username, encodedPassword));
+        }
+        catch (DataIntegrityViolationException e) {
             log.info("User already exists. username: {}", username, e);
             throw new UsernameExistException(username, e);
         }
@@ -33,7 +34,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public Optional<User> findUser(String username) {
-        var user = userRepository.findByUsername(username);
+        var user = this.userRepository.findByUsername(username);
         if (user != null) {
             return Optional.of(user);
         }
