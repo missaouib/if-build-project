@@ -1,5 +1,10 @@
 package com.bananayong.project.login.web;
 
+import java.time.Instant;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import com.bananayong.project.login.LoginService;
 import com.bananayong.project.user.UserService;
 import com.bananayong.project.user.UsernameExistException;
@@ -10,10 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import java.time.Instant;
-import java.util.Map;
-
 @RestController
 @RequiredArgsConstructor
 public class LoginController {
@@ -23,7 +24,7 @@ public class LoginController {
 
     @PostMapping(path = "/sign-up")
     public SignUpResponse signUp(@RequestBody SignUpRequest request) {
-        var user = userService.createUser(request.getUsername(), request.getPassword());
+        var user = this.userService.createUser(request.getUsername(), request.getPassword());
         return SignUpResponse.of(user.getUsername(), Instant.now());
     }
 
@@ -35,7 +36,7 @@ public class LoginController {
         var username = request.getUsername();
         var password = request.getPassword();
 
-        loginService.login(username, password);
+        this.loginService.login(username, password);
         httpServletRequest.getSession(true);
 
         return LoginResponse.of(username, Instant.now());

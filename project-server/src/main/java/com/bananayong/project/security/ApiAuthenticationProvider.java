@@ -30,10 +30,10 @@ public class ApiAuthenticationProvider implements AuthenticationProvider {
         var username = token.getPrincipal();
         var presentedPassword = token.getCredentials();
 
-        var user = userService.findUser(username)
+        var user = this.userService.findUser(username)
                    .orElseThrow(this::notFoundUserException);
 
-        if (!passwordEncoder.matches(presentedPassword, user.getPassword())) {
+        if (!this.passwordEncoder.matches(presentedPassword, user.getPassword())) {
             log.debug("Authentication failed: password does not match stored value");
             throw badCredential();
         }

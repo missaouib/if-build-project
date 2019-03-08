@@ -1,10 +1,10 @@
 package com.bananayong.project.user.web;
 
+import java.time.Instant;
+
 import com.bananayong.project.user.User;
 import lombok.Value;
 import org.jetbrains.annotations.NotNull;
-
-import java.time.Instant;
 
 @Value
 class UserDTO {

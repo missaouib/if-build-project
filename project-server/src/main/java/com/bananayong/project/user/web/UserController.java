@@ -17,7 +17,7 @@ public class UserController {
 
     @GetMapping(path = "{username}")
     public UserDTO getUser(@NotNull @PathVariable String username) {
-        var user = userService.findUser(username);
+        var user = this.userService.findUser(username);
         return user
             .map(UserDTO::toDTO)
             .orElseThrow(() -> new IllegalArgumentException("Not found username: " + username));

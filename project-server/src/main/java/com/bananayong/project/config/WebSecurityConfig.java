@@ -35,7 +35,7 @@ public class WebSecurityConfig { // NOSONAR
 
         @Override
         protected void configure(AuthenticationManagerBuilder auth) {
-            auth.authenticationProvider(authenticationProvider);
+            auth.authenticationProvider(this.authenticationProvider);
         }
 
         @Override
@@ -90,7 +90,7 @@ public class WebSecurityConfig { // NOSONAR
 
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-            var user = securityProperties.getUser();
+            var user = this.securityProperties.getUser();
             auth
                 .inMemoryAuthentication()
                     .withUser(user.getName())

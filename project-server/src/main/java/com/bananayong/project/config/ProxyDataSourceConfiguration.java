@@ -1,5 +1,7 @@
 package com.bananayong.project.config;
 
+import javax.sql.DataSource;
+
 import com.zaxxer.hikari.HikariDataSource;
 import net.ttddyy.dsproxy.listener.logging.SLF4JLogLevel;
 import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
@@ -9,8 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.util.StringUtils;
-
-import javax.sql.DataSource;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
