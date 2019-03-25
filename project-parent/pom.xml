@@ -23,7 +23,7 @@
         <retrofit-version>2.5.0</retrofit-version>
         <handlebars.version>4.1.2</handlebars.version>
 
-        <swagger-codegen.version>3.0.5</swagger-codegen.version>
+        <swagger-codegen.version>3.0.6</swagger-codegen.version>
         <error-prone.version>2.3.2</error-prone.version>
     </properties>
 
