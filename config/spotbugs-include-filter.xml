@@ -6,15 +6,6 @@
         https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd">
 
     <Match>
-        <Bug pattern="SIC_INNER_SHOULD_BE_STATIC"/>
-    </Match>
-    <Match>
-        <Bug pattern="EI_EXPOSE_REP"/>
-    </Match>
-    <Match>
-        <Bug pattern="EI_EXPOSE_REP2"/>
-    </Match>
-    <Match>
-        <Bug pattern="SPRING_CSRF_PROTECTION_DISABLED"/>
+        <Bug category="SECURITY"/>
     </Match>
 </FindBugsFilter>

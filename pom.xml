@@ -49,9 +49,26 @@
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
                 <version>${spotbugs.version}</version>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <!--suppress MavenModelInspection -->
+                    <includeFilterFile>${project.build.outputDirectory}/../../../config/spotbugs-include-filter.xml</includeFilterFile>
                     <excludeFilterFile>${project.build.outputDirectory}/../../../config/spotbugs-exclude-filter.xml</excludeFilterFile>
+                    <plugins>
+                        <plugin>
+                            <groupId>com.h3xstream.findsecbugs</groupId>
+                            <artifactId>findsecbugs-plugin</artifactId>
+                            <version>LATEST</version> <!-- Auto-update to the latest stable -->
+                        </plugin>
+                    </plugins>
                 </configuration>
                 <dependencies>
                     <dependency>
