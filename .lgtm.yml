@@ -1,6 +1,7 @@
 extraction:
   java:
+    before_index:
+    - "export JAVA_HOME=/usr/lib/jvm/java-12-openjdk-amd64"
     index:
-      java_version: 11
       maven:
         version: 3.6.0
