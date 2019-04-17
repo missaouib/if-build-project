@@ -17,7 +17,7 @@
         <java.version>11</java.version>
         <junit-jupiter.version>5.4.2</junit-jupiter.version>
         <intellij-annotations.version>12.0</intellij-annotations.version>
-        <testcontainers.version>1.11.1</testcontainers.version>
+        <testcontainers.version>1.11.2</testcontainers.version>
         <datasource-proxy.version>1.5.1</datasource-proxy.version>
         <swagger-core-version>2.0.7</swagger-core-version>
         <retrofit-version>2.5.0</retrofit-version>
