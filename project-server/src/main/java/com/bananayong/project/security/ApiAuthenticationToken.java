@@ -22,6 +22,8 @@ import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.CLASS;
 @JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE)
 public class ApiAuthenticationToken extends AbstractAuthenticationToken { // NOSONAR
 
+    private static final long serialVersionUID = -2137201805588460991L;
+
     private final String principal;
     private long id;
     private String credentials;

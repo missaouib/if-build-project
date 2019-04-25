@@ -38,7 +38,7 @@
     <properties>
         <pmd.version>6.13.0</pmd.version>
         <spotbugs.version>3.1.11</spotbugs.version>
-        <maven-pmd-plugin.version>3.10.0</maven-pmd-plugin.version>
+        <maven-pmd-plugin.version>3.12.0</maven-pmd-plugin.version>
         <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
         <checkstyle.version>8.19</checkstyle.version>
         <jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>
