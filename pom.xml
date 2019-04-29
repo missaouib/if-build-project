@@ -40,7 +40,7 @@
         <spotbugs.version>3.1.11</spotbugs.version>
         <maven-pmd-plugin.version>3.12.0</maven-pmd-plugin.version>
         <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
-        <checkstyle.version>8.19</checkstyle.version>
+        <checkstyle.version>8.20</checkstyle.version>
         <jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>
         <dom4j.version>2.1.1</dom4j.version>
         <commons-codec.version>1.12</commons-codec.version>
