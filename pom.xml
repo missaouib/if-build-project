@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.6.RELEASE</version>
+        <version>2.2.1.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.bananayong</groupId>
@@ -36,14 +36,14 @@
     </modules>
 
     <properties>
-        <pmd.version>6.15.0</pmd.version>
+        <java.version>11</java.version>
+        <pmd.version>6.19.0</pmd.version>
         <spotbugs.version>3.1.12</spotbugs.version>
         <maven-pmd-plugin.version>3.12.0</maven-pmd-plugin.version>
         <maven-checkstyle-plugin.version>3.1.0</maven-checkstyle-plugin.version>
-        <checkstyle.version>8.21</checkstyle.version>
-        <jacoco-maven-plugin.version>0.8.4</jacoco-maven-plugin.version>
-        <dom4j.version>2.1.1</dom4j.version>
-        <commons-codec.version>1.12</commons-codec.version>
+        <checkstyle.version>8.26</checkstyle.version>
+        <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+        <fingsecbugs-maven-plugin.version>1.10.0</fingsecbugs-maven-plugin.version>
     </properties>
 
     <build>
@@ -62,14 +62,18 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <jvmArgs>--add-opens java.base/java.lang=ALL-UNNAMED</jvmArgs>
                     <!--suppress MavenModelInspection -->
-                    <includeFilterFile>${project.build.outputDirectory}/../../../config/spotbugs-include-filter.xml</includeFilterFile>
-                    <excludeFilterFile>${project.build.outputDirectory}/../../../config/spotbugs-exclude-filter.xml</excludeFilterFile>
+                    <includeFilterFile>${project.build.outputDirectory}/../../../config/spotbugs-include-filter.xml
+                    </includeFilterFile>
+                    <excludeFilterFile>${project.build.outputDirectory}/../../../config/spotbugs-exclude-filter.xml
+                    </excludeFilterFile>
                     <plugins>
                         <plugin>
                             <groupId>com.h3xstream.findsecbugs</groupId>
                             <artifactId>findsecbugs-plugin</artifactId>
-                            <version>1.9.0</version> <!-- Auto-update to the latest stable -->
+                            <version>${fingsecbugs-maven-plugin.version}
+                            </version> <!-- Auto-update to the latest stable -->
                         </plugin>
                     </plugins>
                 </configuration>
@@ -78,26 +82,6 @@
                         <groupId>com.github.spotbugs</groupId>
                         <artifactId>spotbugs</artifactId>
                         <version>${spotbugs.version}</version>
-                        <exclusions>
-                            <exclusion>
-                                <groupId>org.dom4j</groupId>
-                                <artifactId>dom4j</artifactId>
-                            </exclusion>
-                            <exclusion>
-                                <groupId>commons-codec</groupId>
-                                <artifactId>commons-codec</artifactId>
-                            </exclusion>
-                        </exclusions>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.dom4j</groupId>
-                        <artifactId>dom4j</artifactId>
-                        <version>${dom4j.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>commons-codec</groupId>
-                        <artifactId>commons-codec</artifactId>
-                        <version>${commons-codec.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
