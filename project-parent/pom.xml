@@ -14,17 +14,16 @@
     <description>Parent module</description>
 
     <properties>
-        <java.version>11</java.version>
-        <junit-jupiter.version>5.4.2</junit-jupiter.version>
-        <intellij-annotations.version>12.0</intellij-annotations.version>
-        <testcontainers.version>1.11.3</testcontainers.version>
+        <jetbrains-annotations.version>18.0.0</jetbrains-annotations.version>
+        <testcontainers.version>1.12.3</testcontainers.version>
         <datasource-proxy.version>1.5.1</datasource-proxy.version>
-        <swagger-core-version>2.0.8</swagger-core-version>
-        <retrofit-version>2.6.0</retrofit-version>
+        <swagger-core-version>2.1.0</swagger-core-version>
+        <retrofit-version>2.6.1</retrofit-version>
         <handlebars.version>4.1.2</handlebars.version>
+        <hibernate-validator.version>6.1.0.Final</hibernate-validator.version>
 
-        <swagger-codegen.version>3.0.8</swagger-codegen.version>
-        <error-prone.version>2.3.2</error-prone.version>
+        <swagger-codegen.version>3.0.14</swagger-codegen.version>
+        <error-prone.version>2.3.3</error-prone.version>
     </properties>
 
     <dependencyManagement>
@@ -51,15 +50,10 @@
                 <version>${datasource-proxy.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.intellij</groupId>
+                <groupId>org.jetbrains</groupId>
                 <artifactId>annotations</artifactId>
-                <version>${intellij-annotations.version}</version>
+                <version>${jetbrains-annotations.version}</version>
                 <optional>true</optional>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter</artifactId>
-                <version>${junit-jupiter.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.testcontainers</groupId>
@@ -106,7 +100,6 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <parameters>true</parameters>
                         <compilerArgs>
@@ -148,6 +141,7 @@
                     <trimStackTrace>false</trimStackTrace>
                     <redirectTestOutputToFile>true</redirectTestOutputToFile>
                     <runOrder>alphabetical</runOrder>
+                    <forkCount>0</forkCount>
                 </configuration>
             </plugin>
         </plugins>

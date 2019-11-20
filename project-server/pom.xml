@@ -95,7 +95,7 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.intellij</groupId>
+            <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
         </dependency>
 
@@ -104,6 +104,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
