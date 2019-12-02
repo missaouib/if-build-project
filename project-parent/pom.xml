@@ -15,7 +15,7 @@
 
     <properties>
         <jetbrains-annotations.version>18.0.0</jetbrains-annotations.version>
-        <testcontainers.version>1.12.3</testcontainers.version>
+        <testcontainers.version>1.12.4</testcontainers.version>
         <datasource-proxy.version>1.5.1</datasource-proxy.version>
         <swagger-core-version>2.1.0</swagger-core-version>
         <retrofit-version>2.6.2</retrofit-version>
