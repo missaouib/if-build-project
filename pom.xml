@@ -37,7 +37,7 @@
 
     <properties>
         <java.version>11</java.version>
-        <pmd.version>6.19.0</pmd.version>
+        <pmd.version>6.20.0</pmd.version>
         <spotbugs.version>3.1.12</spotbugs.version>
         <maven-pmd-plugin.version>3.12.0</maven-pmd-plugin.version>
         <maven-checkstyle-plugin.version>3.1.0</maven-checkstyle-plugin.version>
