@@ -23,7 +23,7 @@
         <hibernate-validator.version>6.1.0.Final</hibernate-validator.version>
 
         <swagger-codegen.version>3.0.14</swagger-codegen.version>
-        <error-prone.version>2.3.3</error-prone.version>
+        <error-prone.version>2.3.4</error-prone.version>
     </properties>
 
     <dependencyManagement>
